@@ -2,12 +2,34 @@
 
 const bar_colors = {
   liked: "#eb6834",   
-  skipped: "#2a78d6", 
+  skipped: "#8c02e2", 
   blocked: "#1baf7a" 
 };
 
+const bar_legend = {
+  liked: "Liked",
+  skipped: "Skipped",
+  blocked: "Blocked"
+};
+ 
+
+function drawBarLegend() {
+  const legend = d3.select("#bar-legend");
+ 
+  for (const category of ["liked", "skipped", "blocked"]) {
+    //square
+    legend.append("span")
+      .attr("class", "key")
+      .style("background", bar_colors[category]);
+ 
+    legend.append("span")
+      .text(" " + bar_legend[category]);
+  }
+}
 
 function drawBarChart(monthlyTotals) {
+  drawBarLegend();
+  
   const width = 700;
   const height = 400;
   const margin = 60;   //make space for axes
@@ -64,4 +86,5 @@ function drawBarChart(monthlyTotals) {
       .attr("text-anchor", "middle")
       .text(d.matches + " matches");
   }
+
 }
