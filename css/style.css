@@ -1,0 +1,23 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 30px;
+}
+
+/* color legend */
+.key {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-left: 10px;
+}
+
+/* checkboxes on left, graph on right */
+.graph-area {
+  display: flex;
+  gap: 30px;
+}
+
+.filters label {
+  display: block;
+  margin: 6px 0;
+}
