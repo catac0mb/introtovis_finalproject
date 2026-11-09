@@ -1,4 +1,5 @@
 let allMatches = [];
+let monthlyTotals = [];
 
 
 async function main() {
@@ -9,13 +10,21 @@ async function main() {
     const messages = await d3.csv("data/chat_message.csv");
 
     allMatches = makeMatches(messages);
-    const monthlyTotals = makeMonthlyTotals(likes, skips, blocks, allMatches);
+    monthlyTotals = makeMonthlyTotals(likes, skips, blocks, allMatches);
 
-    drawBarChart(monthlyTotals);
+    drawBarLegend();
+    updateBarChart();
     updateNetworkGraph();
 
-    // on checkbox changes redraw the graph
-    d3.selectAll("input").on("change", updateNetworkGraph);
+    // on checkbox changes redraw the matching chart
+    d3.selectAll("input[name='category']").on("change", updateBarChart);
+    d3.selectAll("input[name='month'], input[name='sentiment']").on("change", updateNetworkGraph);
+}
+
+
+// redraws the bar chart with only the checked interaction types
+function updateBarChart() {
+    drawBarChart(monthlyTotals, getCheckedValues("category"));
 }
 
 
