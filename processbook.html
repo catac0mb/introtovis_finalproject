@@ -5,18 +5,35 @@
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Unhinged Data Analysis Process Book</title>
+    <!-- Simple.css: classless stylesheet that styles plain HTML elements -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simpledotcss@2.3.1/simple.min.css">
 
   </head>
   <body>
 
+    <header>
     <h1>Process Book: Unhinged Data Analysis</h1>
     <p>Caitlin Johnson and Timur Kasimov</p>
     <p>jcaitlin@wustl.edu; ktimur@wustl.edu</p>
     <p>Caitlin UID: 602924; Timur UID: 603011</p>
 
     <p><a href="index.html"> Visualizations</a></p>
+
+    <nav>
+      <a href="#overview">Overview</a>
+      <a href="#related-work">Related Work</a>
+      <a href="#questions">Questions</a>
+      <a href="#data">Data</a>
+      <a href="#eda">Exploratory Data Analysis</a>
+      <a href="#design-evolution">Design Evolution</a>
+      <a href="#implementation">Implementation</a>
+      <a href="#evaluation">Evaluation</a>
+    </nav>
+    </header>
+
+  <main>
     
-    <h1>Overview and Motivation</h1>
+    <h2 id="overview">Overview and Motivation</h2>
     <p>We wanted something fun, practical, and personal that people are likely to use for 
         themselves. This allows us to do simple numerical data analysis and also offers 
         an opportunity to explore other areas like sentiment analysis (for messages with matches).
@@ -24,7 +41,7 @@
         agreed to examine her Hinge data for this project and gain personal dating insights – 
         two birds with one stone, if you will. </p>
 
-    <h1>Related Work</h1>
+    <h2 id="related-work">Related Work</h2>
     <p> We tend to spend so much time on phone apps that receiving data-driven summaries from them about our lives 
         has become both a common self-reflection / self-analytics practice and a source of entertainment for many. Some of the most well-known examples of this are Spotify Wrapped,
        Health trends on Apple devices, Google Photos yearly summaries. Speaking from our personal experiences, many people in our circles also spend a lot of time on
@@ -45,44 +62,55 @@
 
 
 
-    <h1>Questions: What questions are you trying to answer? How did these questions evolve throughout the project? What new 
-        questions did you consider in the course of your analysis?</h1>
-    <p> As we were exploring the raw data available from the Hinge app, we first formulated some basic questions:
+    <h2 id="questions">Questions</h2>
+    <p> As we were exploring the raw data available from the Hinge app, we first formulated some basic questions:</p>
+        <ol>
+            <li>How many likes did Caitlin send and receive?</li>
+            <li>Among the likes sent/received, how many resulted in matches?</li>
+            <li>What did Caitlin's activity look like over time? Did she have more activity in certain months than others?</li>
+            <li>Did her activity taper down over time or was it consistent?</li>
+        </ol>
 
-        1. How many likes did Caitlin send and receive?
-        2. Among the likes sent/received, how many resulted in matches?
-        3. What did Caitlin's activity look like over time? Did she have more activity in certain months than others? 
-        4. Did her activity taper down over time or was it consistent?
-
-
-        We quickly realized that the data available from Hinge was entirely anonymized, and primarily included interactions on Caitlin's side. That is,
+        <p>We quickly realized that the data available from Hinge was entirely anonymized, and primarily included interactions on Caitlin's side. That is,
         the data included no information about the matches themselves, and no information about the messages sent by the matches. However, the data include
         information about all the messages sent by Caitlin to her matches, along with timestamps and grouped by anonymized match IDs. With a large availability of sentiment analysis tools, 
-        we realized that we could analyze the messages sent by Caitlin to her matches to determine the sentiment of those connections. This led us to formulate additional questions:
+        we realized that we could analyze the messages sent by Caitlin to her matches to determine the sentiment of those connections. This led us to formulate additional questions:</p>
 
-        5. What were the sentiments of Caitlin's messages to her various matches? 
-        6. Did she have more positive or negative interactions with her matches, or mostly neutral?
-        7. For any given match, how did the sentiment of Caitlin's messages to that match evolve over time? Did it get more positive or negative, or stay the same?
+        <ol>
+            <li>What were the sentiments of Caitlin's messages to her various matches?</li>
+            <li>Did she have more positive or negative interactions with her matches, or mostly neutral?</li>
+            <li>For any given match, how did the sentiment of Caitlin's messages to that match evolve over time? Did it get more positive or negative, or stay the same?</li>
+            <li>Does the number of messages Caitlin sent to a match relate to the sentiment of that conversation?</li>
+        </ol>
 
 
 
 
 
 
-    <h1>Data</h1>
+    <h2 id="data">Data</h2>
     <p>The Hinge dating app allows users to export their data. We will be using data from 
-        Caitlin’s Hinge profile that includes the following anonymized artifacts of interest: 
-            1) Messages sent to matches (timestamped, also includes text and match ID) 
-            2) Likes sent (timestamped) 
-            3) Blocks sent (timestamped) 
-            4) Profiles skipped (timestamped)
+        Caitlin's Hinge profile that includes the following anonymized artifacts of interest: 
+        <ol>
+            <li>Messages sent to matches (timestamped, also includes text and match ID)</li>
+            <li>Likes sent (timestamped)</li>
+            <li>Blocks sent (timestamped)</li>
+            <li>Profiles skipped (timestamped)</li>
+        </ol>
     </p>
 
-    <h1>Exploratory Data Analysis: What visualizations did you initially use to look at your data?
-         What insights did you gain? How did these insights inform your design?</h1>
+    <h2 id="eda">Exploratory Data Analysis</h2>
+
+    <p>We started by skimming through the data to get a sense of its structure and content, first counting up the number of likes sent, profiles skipped, and profiles blocked. Since the project proposal included a section on design alternatives, we actually settled on a stacked bar chart before visualizing our actual data. The stacked bar chart was the first view of our data, visualized. It immediately revealed an important insight that the number of likes sent was dwarfed by the number of skips and blocks (picky user, what can we say [shrugs]). Therefore, one change that this realization inspired is to be able to filter the types of interactions and rescale the bar chart accordingly. </p>
+
+    <img src="images/m1_bar_chart.png" alt="Milestone 1 stacked bar chart of likes, skips, and blocks per month" width="500">
+
+    <p>The match analysis with radial graph chart was also one of the first looks at the data. We were pretty satisfied with how neat this visualization turned out right away: there weren't too few or too many matches so the visualization did not feel under-/overwhelming. The distances between the central node (user) and the matches showed the continuous spectrum of cold-to-flirty chat, while the blue-grey-pink color scheme clearly indicated the cold, neutral, and flirty match categories as a second encoding of the same sentiment. Furthermore, it was also interesting to note that the number of messages for each match, represented by the size of the node in the graph, did not clearly correlate with the sentiment on that match: M1 is a tiny pink node, and M9 is relatively large but blue. </p>
+
+    <img src="images/m1_network_graph.png" alt="Milestone 1 radial match graph colored by sentiment" width="500">
 
 
-    <h1>Design Evolution</h1>
+    <h2 id="design-evolution">Design Evolution</h2>
 
     <p> We initially considered several approaches to visualize hinge's numerical data.
         The first option emphasized the growth over time of different types of interactions, 
@@ -170,14 +198,42 @@
         sentiment score.</p>
 
 
-    <h1>Implementation: Describe the intent and functionality of the interactive visualizations you implemented. 
-        Provide clear and well-referenced images showing the critical design and interaction elements.</h1>
+    <h2 id="implementation">Implementation</h2>
 
-    <h1>Evaluation: What did you learn about the data by using your visualizations? How did you answer your questions?
-         How well does your visualization work, and how could you improve it?</h1>
+    <p>In order to answer the questions we posed for this project, we went with the stacked bar chart view to simultaneously view likes sent, profiles skipped, and profiles blocked/rejected. We encoded each bar to represent one month of activity to see temporal trends of Caitlin's engagement with the app. We further implemented the interactive filtering to not just show total activity, but also to focus in on only (1) likes sent, (2) profiles skipped, (3) profiles blocked. We also added a tooltip to the stacked bar chart: hovering over any bar shows that month's count for each selected interaction type, their total, and the number of matches. To answer questions regarding the sentiment for each of the matches, we analyzed Caitlin's messages sent to matches and calculated a sentiment score (each message gets +1 for every flirty word or emoji it contains and &minus;1 for every cold one, and a match's score is the average across all messages sent to that match), which we further encoded into three distinct categories with thresholds (Flirty for an average score of 0.25 or above, Cold for &minus;0.05 or below, and Neutral in between). This is a preliminary approach to sentiment analysis, designed by Caitlin in line with her own knowledge of her chats and conversations. Considering our design alternatives, we decided to encode the sentiment both continuously and categorically using the graph chart with Caitlin being the central node and with matches being connected radially. We also visualized the number of messages with the node size. Combined, this visualization would let us clearly see both the sentiment for each match, as well as the overall distribution of sentiments across matches. We also included month filtering to visualize the same data for any one given month.</p>
+
+    <img src="images/m1_bar_chart_liked_filter.png" alt="Stacked bar chart filtered to likes sent only, with the y-axis rescaled" width="500">
+
+    <img src="images/m1_bar_chart_tooltip.png" alt="Stacked bar chart with the hover tooltip showing July 2026 counts, total, and matches" width="500">
+
+    <img src="images/m1_network_graph_aug_filter.png" alt="Match graph filtered to August 2026, showing matches M12, M13, and M14" width="500">
+
+    <h2 id="evaluation">Evaluation</h2>
+
+    <p>As mentioned in the "Exploratory Data Analysis", our visualizations clearly revealed some interesting patterns of Caitlin's activity on Hinge. The non-filtered view of the stacked bar chart shows a few immediate insights that answer most of our questions posed:</p>
+        <ol>
+            <li>Caitlin sends far fewer likes than profiles she skips or likes that she receives and rejects (blocks). In fact, Caitlin did not send any likes since September 2026.</li>
+            <li>Caitlin's activity was by far the highest in July and tapered down since then. Perhaps she got busy with the start of the semester, or maybe she's pursuing an interesting match. Maybe she's juggling both?</li>
+            <li>We cannot deduce from the data an answer to the question "Among the likes sent/received, how many resulted in matches?" We can only deduce the total number of matches resulting from the combined number of likes sent (shown) and received (not shown).</li>
+        </ol>
+
+    <p>The second visualization on sentiment analysis also reveals some clear patterns in response to the sentiment-focused questions:</p>
+        <ol>
+            <li>The majority of Caitlin's matches (10/14) showed a neutral sentiment, only 2 were categorized as flirty, and 2 more as cold. These data tell us that Caitlin's sentiments with her matches are mostly neutral, with a few matches at each extreme.</li>
+            <li>We also realized that, though the sample size is still small, there was no clear association between the number of messages sent and the sentiment category. In particular, match #1 is flirty, but also has one of the smallest number of messages; match #9 has a lot of texts sent, but it is categorized as cold. Match #12 has both an extensive message history and is also flirty. Most of the neutral matches however have relatively small node sizes, indicating few messages sent.</li>
+        </ol>
+
+    <p>Things that work well in our visualizations: The filter for the bar chart expands the squashed "likes sent" category into a clearer focused view, letting the user see the patterns clearly for that category only. The tooltip on the stacked bar chart, added after our exploratory data analysis, shows the exact counts and total for each month, so the user no longer has to estimate numbers from the bar heights. The double encoding of sentiment in both continuous and categorical forms provides a more comprehensive and intuitive view of interactions with each match.</p>
+
+    <p>Limitations:</p>
+        <ul>
+            <li>The word lists are currently sparse, but this is only a preliminary sentiment analysis.</li>
+            <li>Only Caitlin's messages are available. This is a limitation on Hinge's side, since the data is completely anonymized and matches' messages are not exportable.</li>
+        </ul>
 
 
  
 
+  </main>
   </body>
 </html>
