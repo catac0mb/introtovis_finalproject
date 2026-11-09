@@ -11,6 +11,25 @@ body {
   margin-left: 10px;
 }
 
+/* bar chart legend checkboxes in one row */
+#bar-legend label {
+  margin-right: 16px;
+  cursor: pointer;
+}
+
+/* bar chart tooltip */
+.d3-tip {
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+  line-height: 1.4;
+  display: inline-block;
+  z-index: 1;
+  position: absolute;
+  pointer-events: none;   /* so the tooltip never blocks the mouse */
+}
+
 /* checkboxes on left, graph on right */
 .graph-area {
   display: flex;
