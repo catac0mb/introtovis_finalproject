@@ -25,8 +25,49 @@
         two birds with one stone, if you will. </p>
 
     <h1>Related Work</h1>
+    <p> We tend to spend so much time on phone apps that receiving data-driven summaries from them about our lives 
+        has become both a common self-reflection / self-analytics practice and a source of entertainment for many. Some of the most well-known examples of this are Spotify Wrapped,
+       Health trends on Apple devices, Google Photos yearly summaries. Speaking from our personal experiences, many people in our circles also spend a lot of time on
+       dating apps like Hinge, which interestingly does not provide any data-driven summaries to its users. Since insights into one's dating preferences can be both entertaining 
+       and informative for romantic self-awareness, we thought it'd be great to develop visualizations for trends akin to those provided by apps such as Spotify or Apple Health. 
+       Though we quickly realized that the data provided by Hinge is not as rich as that provided by Spotify or Apple Health, we still thought it would be fun to explore the data and see what insights we could glean from it.  
+    </p>
 
-    <h1>Questions</h1>
+    <p> Class inspirations: When considering our design alternatives (see Design Evolution sectin below), we were also inspired by our in-class 
+        debate on pie charts vs bar charts. Despite being team pie-chart in the class debate, we 
+        ultimately decided to use a bar chart instead for our current visualization of the types of interactions over time.
+        We were also inspired by the D3 Force-Directed layouts introduced in Studio 7, particularly the graph-focused approaches to 
+    represent interpersonal relationships with nodes and links. We thought a graph with a central node (the user) connected to other nodes (matches) would 
+    be a great way to visualize the data, which also allows for further use of visual properties for nodes and links to represent different aspects of the relationships.</p>
+
+
+
+
+
+
+    <h1>Questions: What questions are you trying to answer? How did these questions evolve throughout the project? What new 
+        questions did you consider in the course of your analysis?</h1>
+    <p> As we were exploring the raw data available from the Hinge app, we first formulated some basic questions:
+
+        1. How many likes did Caitlin send and receive?
+        2. Among the likes sent/received, how many resulted in matches?
+        3. What did Caitlin's activity look like over time? Did she have more activity in certain months than others? 
+        4. Did her activity taper down over time or was it consistent?
+
+
+        We quickly realized that the data available from Hinge was entirely anonymized, and primarily included interactions on Caitlin's side. That is,
+        the data included no information about the matches themselves, and no information about the messages sent by the matches. However, the data include
+        information about all the messages sent by Caitlin to her matches, along with timestamps and grouped by anonymized match IDs. With a large availability of sentiment analysis tools, 
+        we realized that we could analyze the messages sent by Caitlin to her matches to determine the sentiment of those connections. This led us to formulate additional questions:
+
+        5. What were the sentiments of Caitlin's messages to her various matches? 
+        6. Did she have more positive or negative interactions with her matches, or mostly neutral?
+        7. For any given match, how did the sentiment of Caitlin's messages to that match evolve over time? Did it get more positive or negative, or stay the same?
+
+
+
+
+
 
     <h1>Data</h1>
     <p>The Hinge dating app allows users to export their data. We will be using data from 
@@ -37,7 +78,8 @@
             4) Profiles skipped (timestamped)
     </p>
 
-    <h1>Exploratory Data Analysis</h1>
+    <h1>Exploratory Data Analysis: What visualizations did you initially use to look at your data?
+         What insights did you gain? How did these insights inform your design?</h1>
 
 
     <h1>Design Evolution</h1>
@@ -128,9 +170,11 @@
         sentiment score.</p>
 
 
-    <h1>Implementation</h1>
+    <h1>Implementation: Describe the intent and functionality of the interactive visualizations you implemented. 
+        Provide clear and well-referenced images showing the critical design and interaction elements.</h1>
 
-    <h1>Evaluation</h1>
+    <h1>Evaluation: What did you learn about the data by using your visualizations? How did you answer your questions?
+         How well does your visualization work, and how could you improve it?</h1>
 
 
  
